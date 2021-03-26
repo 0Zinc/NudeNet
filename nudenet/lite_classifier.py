@@ -4,6 +4,7 @@ import pydload
 import numpy as np
 
 from .image_utils import load_images
+from io import BytesIO
 
 
 class LiteClassifier:
@@ -23,7 +24,7 @@ class LiteClassifier:
         self.lite_model = cv2.dnn.readNet(model_path)
 
     def classify(self, image_paths, size=(256, 256)):
-        if isinstance(image_paths, str):
+        if isinstance(image_paths, (str, BytesIO)):
             image_paths = [image_paths]
 
         result = {}
