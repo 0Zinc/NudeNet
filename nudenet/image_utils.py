@@ -51,7 +51,6 @@ def load_img(
             "Could not import PIL.Image. " "The use of `load_img` requires PIL."
         )
 
-    print(path, type(path))
     if isinstance(path, (type(""), BytesIO)):
         img = pil_image.open(path)
     else:
