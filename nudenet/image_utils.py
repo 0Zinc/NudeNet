@@ -6,6 +6,7 @@ import numpy as np
 
 from io import BytesIO
 from PIL import Image as pil_image
+from PIL import UnidentifiedImageError
 
 if pil_image is not None:
     _PIL_INTERPOLATION_METHODS = {
@@ -54,7 +55,7 @@ def load_img(
     if isinstance(path, (type(""), BytesIO)):
         try:
             img = pil_image.open(path)
-        except PIL.UnidentifiedImageError:
+        except UnidentifiedImageError:
             return
     else:
         path = cv2.cvtColor(path, cv2.COLOR_BGR2RGB)
