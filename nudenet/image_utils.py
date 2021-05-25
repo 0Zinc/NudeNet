@@ -52,7 +52,10 @@ def load_img(
         )
 
     if isinstance(path, (type(""), BytesIO)):
-        img = pil_image.open(path)
+        try:
+            img = pil_image.open(path)
+        except PIL.UnidentifiedImageError:
+            return
     else:
         path = cv2.cvtColor(path, cv2.COLOR_BGR2RGB)
         img = pil_image.fromarray(path)
@@ -132,6 +135,8 @@ def load_images(image_paths, image_size, image_names):
     for i, img_path in enumerate(image_paths):
         try:
             image = load_img(img_path, target_size=image_size)
+            if image is None:
+                continue
             image = img_to_array(image)
             image /= 255
             loaded_images.append(image)
