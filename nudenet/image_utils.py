@@ -104,7 +104,7 @@ def img_to_array(img, data_format="channels_last", dtype="float32"):
     # Numpy array x has format (height, width, channel)
     # or (channel, height, width)
     # but original PIL image has format (width, height, channel)
-    x = np.asarray(img, dtype=dtype)
+    x = np.asarray(img).astype(dtype)
     if len(x.shape) == 3:
         if data_format == "channels_first":
             x = x.transpose(2, 0, 1)
